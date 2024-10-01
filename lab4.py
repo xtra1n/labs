@@ -17,22 +17,23 @@ arg = -x  # Введем значение аргумента
 s = arg  # Вводим значение суммы
 
 
-print(f'{"Итерации":^{10}}{"Аргумент":^{10}}{"Сумма":^{10}}')  # Выводим первую строку таблицы
+print(f'{"Итерации":^{12}}{"Аргумент":^{12}}{"Сумма":^{12}}')  # Выводим первую строку таблицы
 
 
-while (cnt <= iterations and ( (x >= eps and ((abs(arg) > e) and abs(arg + e) > eps)) or
-    (x < eps and (abs(arg) > e and abs(arg - e) > eps)))):
+while (cnt <= iterations and  abs(arg) > e and
+    ((x >= eps and abs(arg + e) > eps) or
+    (x < eps and abs(arg - e) > eps))):
     if (cnt - 1) % t == 0:
-        print(f'{cnt:^10.5g}{arg:^10.5g}{s:^10.5g}')  # Выводим значения с указанным шагом
+        print(f'{cnt:^12.5g}{arg:^12.5g}{s:^12.5g}')  # Выводим значения с указанным шагом
     arg = (-1) * x ** i / i
     s += arg
     i += 1
     cnt += 1
-else:
-    if cnt > iterations:  # Выводим конечную сумму
+else:  # Выводим конечную сумму
+    if cnt == 1:
+        print(f'{cnt:^12.5g}{arg:^12.5g}{s:^12.5g}')
+    if cnt > iterations:  
         print('За указанное число итераций необходимой точности достичь не удалось')  
-    elif cnt == 1:
-        print(f'{cnt:^10.5g}{arg:^10.5g}{s:^10.5g}')
     else:
         print(f'Сумма равна: {s:.5g}')
    
