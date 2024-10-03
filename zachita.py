@@ -18,7 +18,7 @@ if not(a+b-c>epsilon and a+c-b>epsilon and b+c-a>epsilon):
     exit()
     
     
-degreeAB = m.acos((a**2+b**2-c**2)/(2*a*b)) 
+degreeAB = m.acos((a**2+b**2-c**2)/(2*a*b))
 degreeCB = m.acos((c**2+b**2-a**2)/(2*c*b))
 degreeAC = m.acos((c**2+a**2-b**2)/(2*a*c))
 p = (a + b + c)/2
