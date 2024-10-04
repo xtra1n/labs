@@ -26,7 +26,7 @@ print('----------------------------------------')
 while a <= final_value:
     z1 = a**3 - 19.1*a**2 + 27.9*a + 5.58
     z2 = a**2 - m.sin(m.pi*a)
-    print(f'|{a:^12.5g}|{z1:^12.5g}|{z2:^12.5g}|') 
+    print(f'|{a:^12.5g}|{z1:^12.5g}|{z2:^12.5g}|')
     a += step
     if z2 > max:  # Ищем максимальный элемент
         max = z2
@@ -42,7 +42,7 @@ if notch < 4 or notch > 8:  # Проверяем корректность дан
     exit()
     
 print(' ' * 6, end = '')  # Делаем отступ для верхней шкалы
-print(f'{min:.5g}', end = '')  # Выводим минимальный элемент 
+print(f'{min:.5g}', end = '')  # Выводим минимальный элемент
 distance = int(80 / (notch-1))  # Считаем растояние между засечками
 for i in range(1, notch):
     tick = min + i*(max - min)/(notch - 1)  # Считаем значение засечек
@@ -53,7 +53,7 @@ scale = (max - min) / 80  # Считаем масштаб
 a = initial_value  # Заново вводим переменную
 
 for i in range(cnt):  # Строим график второй z2
-    z2 = a**2 - m.sin(m.pi*a)  
+    z2 = a**2 - m.sin(m.pi*a)
     print(f'{a:<5g}|', end = '')  # Выводим значение переменной
     pos = (int((z2 - min)/scale))  # Считаем позицию точки
     pos_zero = int((0 - min)/(scale)) if min <= 0 <= max else -1  # Считаем позицию оси абцисс
@@ -66,5 +66,3 @@ for i in range(cnt):  # Строим график второй z2
             print(' ', end = '')
     print()
     a += step
-
-
