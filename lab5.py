@@ -13,7 +13,7 @@ initial_value = float(input('Введите начальное значение 
 final_value = float(input('Введите конечное значение аргумента: '))
 step = float(input('Введите шаг печати: '))
 
-while initial_value > final_value:  # Проверяем введенные данные
+while initial_value >= final_value:  # Проверяем введенные данные
     print('\nНачальное значение должно быть меньше конечного\n')
     initial_value = float(input('Введите начальное значение аргумента: '))
     final_value = float(input('Введите конечное значение аргумента: '))
@@ -40,7 +40,6 @@ for i in range(cnt):
         max = z2
     if z2 < min:  # Ищем минимальный элемент
         min = z2
-    
     if z2 > 0:
         sum_z2 += z2
 print('----------------------------------------')
@@ -53,8 +52,9 @@ scale = (max - min) / width  # Считаем масштаб
 
 while notch < 4 or notch > 8:  # Проверяем корректность данных
     notch = int(input('\nВведите количество засечек (4-8): \n'))
-if abs(max - min) < 1e-9:
+if abs(max - min) < 1e-20:
     print('Ввденные данные некоректны.')
+    exit()
 
 print(' ' * 8, end = '')  # Делаем отступ для верхней шкалы
 print(f'{min:.5g}', end = '')  # Выводим минимальный элемент
