@@ -5,19 +5,19 @@
 # 8. Первый нулевой и минимальный отрицательный.
 
 index_zero = None
-min_el = None
-while index_zero is None or min_el is None:
+index_min_el = None
+while index_zero is None or index_min_el is None:  # Выполняем программу пока пользователь не введет корректные данные
     index_zero = None
-    min_el = None
+    index_min_el = None
     print('\nМассив должен содержать отрицательные и нулевые элементы !!!\n')
-    arr = list(map(int, (input('Введите элементы массива: ').split())))
+    arr = list(map(int, (input('Введите элементы списка: ').split())))  # Вводим массив
 
     for i in range(len(arr)):
-        if arr[i] == 0 and index_zero is None:
+        if arr[i] == 0 and index_zero is None:  # Проверяем первое вхождение нуля
             index_zero = i
-        if arr[i] < 0 and (min_el is None or arr[min_el] > arr[i]):
-            min_el = i
-else:
-    arr[index_zero], arr[min_el] = arr[min_el], arr[index_zero]
+        if arr[i] < 0 and (index_min_el is None or arr[index_min_el] > arr[i]):  # Провеярем первое вхождение минимального отрицательного
+            index_min_el = i
 
-    print('\nИзмененный массив: ', *arr)
+arr[index_zero], arr[index_min_el] = arr[index_min_el], arr[index_zero]  # Меняем местами
+
+print('\nИзмененный список: ', *arr)

@@ -4,14 +4,14 @@
 # 4. Найти наиболее длинную непрерывную последовательность по варианту. В-4
 # 4. Убывающая последовательность простых чисел.
 
-arr = list(map(int, (input('Введите элементы массива: ').split())))
+arr = list(map(int, (input('Введите элементы списка: ').split())))  # Запрашиваем данные на ввод
 cnt = 0
 max_len = 0
 
 for i in range(1,len(arr)):
     if (1 < arr[i] < arr[i-1] and
         all(arr[i] % n != 0 for n in range(2,arr[i]//2)) and
-        all(arr[i-1] % n != 0 for n in range(2,arr[i-1]//2))):
+        all(arr[i-1] % n != 0 for n in range(2,arr[i-1]//2))):  # Проверяем на убывающую последовательность и на простоту числа
         cnt += 1
     else:
         max_len = max(cnt, max_len)
