@@ -16,4 +16,5 @@ for i in range(1,len(arr)):
     else:
         max_len = max(cnt, max_len)
         cnt = 0
-print('Максимальная длина последовательности: ', max_len + 1)
+print('Максимальная длина последовательности: ', max_len + 1 if max_len > 0
+      else 'Последовательности не нашлось')
