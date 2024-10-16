@@ -33,4 +33,6 @@ if degreeAC >= degreeCB and degreeAC >= degreeAB:
 
 print(f'\nДлины сторон a,b,c: {a:.5g}, {b:.5g}, {c:.5g}')
 print(f'\nВысота из наибольшего угла: {h:.5g}')
+
+
     
