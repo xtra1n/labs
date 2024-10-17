@@ -8,15 +8,13 @@ index = int(input('Введите номер экстремума: '))
 cnt = 0
 flag = False
 
-while index > len(arr):  # Провеярем коректность данных
-    print('Номер экстремума не может быть больше длины списка')
-    index = int(input('Введите номер экстремума: '))
-while index <= 0:
-    index = int(input('Введите положительный индекс, куда нужно добавить элемент: '))
+while index > len(arr) or index <= 0:  # Провеярем коректность данных
+        print('Номер экстремума не может быть больше или меньше длины списка')
+        index = int(input('Введите номер экстремума: '))
     
-for i in range(index,len(arr) - 2):
-    if (arr[i-1] < arr[i] > arr[i+1] or
-        arr[i-1] > arr[i] < arr[i+1]):  # Проверяем является элемент экстремумом
+for i in range(index,len(arr) - 1):
+    if ((arr[i-1] < arr[i]  and arr[i] > arr[i+1]) or
+        (arr[i-1] > arr[i] and arr[i] < arr[i+1])):  # Проверяем является элемент экстремумом
         cnt += 1  # Считаем его номер
         if cnt == index:  # Если номер совпал с необходимым - выводим
             print(f'Экстремум №{index}:', arr[i])
