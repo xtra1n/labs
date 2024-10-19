@@ -4,20 +4,20 @@
 # Найти значение K-го экстремума в списке.
 
 arr = list(map(int, (input('Введите элементы списка: ').split())))  # Запрашиваем данные на ввод
-index = int(input('Введите номер экстремума: '))
+index_extr = int(input('Введите номер экстремума: '))
 cnt = 0
 flag = False
 
-while index > len(arr) or index <= 0:  # Провеярем коректность данных
+while index_extr > len(arr) or index_extr <= 0:  # Провеярем коректность данных
         print('Номер экстремума не может быть больше или меньше длины списка')
-        index = int(input('Введите номер экстремума: '))
+        index_extr = int(input('Введите номер экстремума: '))
     
-for i in range(index,len(arr) - 1):
+for i in range(index_extr,len(arr) - 1):
     if ((arr[i-1] < arr[i]  and arr[i] > arr[i+1]) or
         (arr[i-1] > arr[i] and arr[i] < arr[i+1])):  # Проверяем является элемент экстремумом
         cnt += 1  # Считаем его номер
-        if cnt == index:  # Если номер совпал с необходимым - выводим
-            print(f'Экстремум №{index}:', arr[i])
+        if cnt == index_extr:  # Если номер совпал с необходимым - выводим
+            print(f'Экстремум №{index_extr}:', arr[i])
             flag = True
             break
 if not flag:
