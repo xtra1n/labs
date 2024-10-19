@@ -6,9 +6,11 @@
 
 index_zero = None
 index_min_el = None
+
 while index_zero is None or index_min_el is None:  # Выполняем программу пока пользователь не введет корректные данные
     index_zero = None
     index_min_el = None
+
     print('\nМассив должен содержать отрицательные и нулевые элементы !!!\n')
     arr = list(map(int, (input('Введите элементы списка: ').split())))  # Вводим массив
 

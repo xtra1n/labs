@@ -35,7 +35,7 @@ while cnt <= iterations and  abs(arg_i) > eps:
     sum -= (arg_i)  # Прибавляем аргумент к сумме
     if (cnt - 1) % t == 0 and cnt <= iterations:
         print(f'|{cnt:^12.5g}|{-arg_i:^12.5g}|{sum:^12.5g}|')  # Выводим значения с указанным шагом
-    
+     
 else:  # Выводим конечную сумму
     if cnt == 1:
         print(f'|{cnt:^12.5g}|{arg:^12.5g}|{sum:^12.5g}|')
