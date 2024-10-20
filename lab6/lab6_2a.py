@@ -10,7 +10,6 @@ while index <= 0 or index > len(arr) + 1 or len(arr) <= 0:
     if index <= 0: 
         index = int(input('Введите положительный индекс элемента, который необходимо удалить: '))
     elif len(arr) <= 0:
-        
         arr = list((input('Введен пустой список. Введите элементы списка: ').split()))
     else:
         print('Индекс элемента за границами списка')

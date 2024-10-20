@@ -6,19 +6,19 @@
 arr = list(map(int, (input('Введите элементы списка: ').split())))  # Запрашиваем данные на ввод
 index_extr = int(input('Введите номер экстремума: '))
 cnt = 0
-flag = False
+#flag = False
 
 while index_extr > len(arr) or index_extr <= 0:  # Провеярем коректность данных
         print('Номер экстремума не может быть больше или меньше длины списка')
         index_extr = int(input('Введите номер экстремума: '))
     
-for i in range(index_extr,len(arr) - 1):
+for i in range(1,len(arr) - 1):
     if ((arr[i-1] < arr[i]  and arr[i] > arr[i+1]) or
         (arr[i-1] > arr[i] and arr[i] < arr[i+1])):  # Проверяем является элемент экстремумом
         cnt += 1  # Считаем его номер
         if cnt == index_extr:  # Если номер совпал с необходимым - выводим
-            print(f'Экстремум №{index_extr}:', arr[i])
-            flag = True
+            print(f'Экстремум на {i + 1} месте:', arr[i])
             break
-if not flag:
+
+else:
     print('Экстремума с таким номером не нашлось')
