@@ -1,17 +1,22 @@
-arr = list(map(int, input().split()))
+# Леонтьев Андрей
+# ИУ7-14Б
+# Лабораторная работа №7 “Списки. Часть 2”
+# 2. После каждого элемента целочисленного списка, имеющего свойство по варианту, добавить его удвоенное значение, без использования вложенных циклов. Без insert append срезов
+# Чётные элементы
+
+arr = list(map(int, input('Введите элементы списка: ').split()))
 
 cnt = 0
 
 for el in arr:
-    if el % 2 != 0:
+    if el % 2 == 0:
         cnt += 1
-        arr.append(0)
+        arr.append(1)
 
 n = len(arr) - 1
 for i in range(len(arr) - cnt - 1, -1, -1):
-    if arr[i] % 2 != 0:
+    if arr[i] % 2 == 0:
         arr[n - 1], arr[n] = arr[i], 2 * arr[i]
-        print(n)
         n-=2
     else:
         arr[n] = arr[i] 
@@ -19,4 +24,4 @@ for i in range(len(arr) - cnt - 1, -1, -1):
 
         
 
-print(arr)
+print('Измененный список: ', *arr)

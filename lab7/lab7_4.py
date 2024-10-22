@@ -1,18 +1,15 @@
-from datetime import datetime
+# Леонтьев Андрей
+# ИУ7-14Б
+# Лабораторная работа №7 “Списки. Часть 2”
+# 4. Изменение элемента в списке строк по варианту.
+# 8. Замена всех заглавных гласных английских букв на строчные
 
-arr = list(map(str, input().split()))
+arr = list(map(str, input('Введите элементы списка: ').split()))
 
-start_time = datetime.now()
-
-vowels_upper = 'AEIOU'
-
+vowels_upper = 'AEIOUY'
 
 for i in range(len(arr)):
     for symbol in vowels_upper:
         arr[i] = arr[i].replace(symbol, symbol.lower())
 
-print(arr)
-
-end_time = datetime.now()
-execution_time = end_time - start_time
-print(f"Время выполнения: {execution_time}")
+print('Измененный список: ', *arr)
