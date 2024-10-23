@@ -6,11 +6,10 @@
 
 arr = list(map(str, input('Введите элементы списка: ').split()))
 
-vowels_upper = 'AEIOUY'
+vowels_upper = 'AEIOUY'  # Задаем строку английских гласных
 
+# Обход по индексам списка
 for i in range(len(arr)):
-    arr[i] = ''.join(char.lower() if char in vowels_upper else char for char in arr[i])
-    # for symbol in vowels_upper:
-    #     arr[i] = arr[i].replace(symbol, symbol.lower())
+    arr[i] = ''.join(char.lower() if char in vowels_upper else char for char in arr[i])  # Проходимся по символам строки
 
 print('Измененный список: ', *arr)
