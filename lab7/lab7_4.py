@@ -9,7 +9,8 @@ arr = list(map(str, input('Введите элементы списка: ').spli
 vowels_upper = 'AEIOUY'
 
 for i in range(len(arr)):
-    for symbol in vowels_upper:
-        arr[i] = arr[i].replace(symbol, symbol.lower())
+    arr[i] = ''.join(char.lower() if char in vowels_upper else char for char in arr[i])
+    # for symbol in vowels_upper:
+    #     arr[i] = arr[i].replace(symbol, symbol.lower())
 
 print('Измененный список: ', *arr)
