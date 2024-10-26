@@ -9,8 +9,6 @@ arr = list(map(int, input('Введите элементы списка: ').spli
 ind_plus = 1
 ind_minus = 0
 
-
-
 for i in range(len(arr)):
     if arr[i] <= 0:
         arr[ind_minus] = arr[i]
