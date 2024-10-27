@@ -1,4 +1,4 @@
-# 4. Наименьшее количество чётных элементов.
+# 2. Наименьшее количество отрицательных элементов
 
 print('Ввод матрицы должен оканчиваться пустой строкой ')
 
@@ -8,20 +8,10 @@ width = len(matrix[0])
 index = 0
 cnt = 0
 line = matrix[0]
-max_cnt = -1
-min_cnt = width + 1
+column = -1
 
 while matrix[index] != []:
-    for i in range(width):
-        if int(line[i]) < 0:
-            cnt += 1
-    if max_cnt < cnt:
-        max_cnt = cnt
-        max_line = index
-    if min_cnt >= cnt:
-        min_cnt = cnt
-        min_line = index
-    cnt = 0
+    
     
     index += 1
     line = list(map(str, input(f'Введите {index+1}-ю строку матрицы: ').split()))
@@ -31,13 +21,28 @@ while matrix[index] != []:
     while len(matrix[index]) != width and matrix[index] != []:
         print('Количество элементов должно быть таким же как в первой строке')
         matrix[index] = (list(map(str, input(f'Введите в {index+1}-ю строку матрицы: ').split())))
-        line = matrix[index] 
+        line = matrix[index]
+
 print('Изначальная матрица:')
 for line in matrix:
     print(*line)
 
-print('\n Измененная матрица:')
-matrix[max_line], matrix[min_line] = matrix[min_line], matrix[max_line]
+min_negative = (len(matrix))
+length = len(matrix)
 
+for i in range(length):
+    count_negative = 0
+    for j in range(width):
+        if int(matrix[j][i]) < 0:
+            count_negative += 1
+    if min_negative > count_negative:
+        min_negative = count_negative
+        column = i
+
+print('Столбец с наименьшим количеством отрциательным:')
 for line in matrix:
-    print(*line)
+    for j in range(len(line)):
+        if j == column:
+            print(line[j])
+        
+
