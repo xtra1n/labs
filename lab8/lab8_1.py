@@ -13,7 +13,7 @@ max_line = []
 while matrix[i] != []:
     for el in line:
         if int(el) % 2 == 0:
-            cnt += 1 
+            cnt += 1
     if cnt >= len(max_line) and cnt != 0:
         max_line = line
     cnt = 0
@@ -24,8 +24,9 @@ while matrix[i] != []:
     matrix.append(line)
     while len(matrix[i]) != width and matrix[i] != []:
         print('Количество элементов должно быть таким же как в первой строке')
-        matrix[i] = (list(map(str, input(f'Введите в {i+1}-ю строку матрицы: ').split())))
-        line = matrix[i] 
+        matrix[i] = (list(map(str, input(
+            f'Введите в {i+1}-ю строку матрицы: ').split())))
+        line = matrix[i]
 
 print('Изначальная матрица: ')
 for line in matrix:
