@@ -1,14 +1,20 @@
+# Леонтьев Андрей
+# ИУ7-14Б
+# Лабораторная работа №8 “Матрицы. Часть 1”
+# 3. Найти столбец, имеющий определённое свойство по варианту
 # 2. Наименьшее количество отрицательных элементов
 
 print('Ввод матрицы должен оканчиваться пустой строкой ')
 
+# Запрашиваем первую строку матрицы
 matrix = [list(map(str, input('Введите 1-ю строку матрицы: ').split()))]
 
 width = len(matrix[0])
 index = 0
 line = matrix[0]
-column = -1
+column = -1  # Вводим переменную для номера стобца
 
+# Делаем ввод матрицы
 while matrix[index] != []:
     index += 1
     line = list(map(str, input(
@@ -26,9 +32,10 @@ print('Изначальная матрица:')
 for line in matrix:
     print(*line)
 
-min_negative = (len(matrix))
-length = len(matrix)
+# Вводим переменные для количества отрицательных и длину массива
+min_negative, length = len(matrix), len(matrix)
 
+# Проходимся по столбцам и ищем с минимальным количеством
 for i in range(length):
     count_negative = 0
     for j in range(width):

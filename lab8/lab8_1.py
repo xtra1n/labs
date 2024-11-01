@@ -1,32 +1,42 @@
+# Леонтьев Андрей
+# ИУ7-14Б
+# Лабораторная работа №8 “Матрицы. Часть 1”
+# 1. Найти строку, имеющую определённое свойство по варианту.
 # 4. Наименьшее количество чётных элементов.
+
 
 print('Ввод матрицы должен оканчиваться пустой строкой ')
 
+# Запрашиваем первую строку матрицы
 matrix = [list(map(str, input('Введите 1-ю строку матрицы: ').split()))]
 
-width = len(matrix[0])
-i = 0
+width = len(matrix[0])  # Запоминаем ширину матрицы
+index = 0
 cnt = 0
-line = matrix[0]
-max_line = []
+line = matrix[0]  # Запоминаем в переменную 1 строку
+max_line = []  # Вводим переменную для максимальное строки
 
-while matrix[i] != []:
+# Запрашиваем ввод. пока аользователь не введет пустую строку
+while matrix[index] != []:
     for el in line:
-        if int(el) % 2 == 0:
+        if int(el) % 2 == 0:  # Проверяем элементы в строке на четность
             cnt += 1
     if cnt >= len(max_line) and cnt != 0:
-        max_line = line
+        max_line = line  # Запоминаем максимальную строку
     cnt = 0
-    i += 1
-    line = list(map(str, input(f'Введите {i+1}-ю строку матрицы: ').split()))
-    if line == []:
+    index += 1
+    # Запрашиваем следующую строку
+    line = list(map(str, input(
+        f'Введите {index+1}-ю строку матрицы: ').split()))
+    if line == []:  # Если введена пустая строка, завершаем цикл
         break
     matrix.append(line)
-    while len(matrix[i]) != width and matrix[i] != []:
+    # Проверяем корректность введенной строки
+    while len(matrix[index]) != width and matrix[index] != []:
         print('Количество элементов должно быть таким же как в первой строке')
-        matrix[i] = (list(map(str, input(
-            f'Введите в {i+1}-ю строку матрицы: ').split())))
-        line = matrix[i]
+        matrix[index] = (list(map(str, input(
+            f'Введите в {index+1}-ю строку матрицы: ').split())))
+        line = matrix[index]
 
 print('Изначальная матрица: ')
 for line in matrix:

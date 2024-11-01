@@ -33,4 +33,5 @@ for i in range(width):
         if i + j >= width and min_value > matrix[i][j]:
             min_value = matrix[i][j]
 
-print(max_value, min_value)
+print(f'Максимальное значение над главной диагональю: {max_value},\n'
+      f'Минимальное значение под побочной диагональю: {min_value}')
