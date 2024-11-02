@@ -1,12 +1,16 @@
-# 2. Наименьшее количество отрицательных элементов
+# Леонтьев Андрей
+# ИУ7-14Б
+# Лабораторная работа №8 “Матрицы. Часть 1”
+# 4. Переставить местами столбцы с максимальной и минимальной суммой элементов.
 
 print('Ввод матрицы должен оканчиваться пустой строкой ')
 
+# Запрашиваем первую строку матрицы
 matrix = [list(map(str, input('Введите 1-ю строку матрицы: ').split()))]
 
 width = len(matrix[0])
 index = 0
-coloumn_sum = 0
+coloumn_sum = 0  
 max_sum, max_coloumn = None, 0
 min_sum, min_coloumn = None, 0
 line = matrix[0]
@@ -30,6 +34,7 @@ print('Изначальная матрица:')
 for line in matrix:
     print(*line)
 
+# Делаем обход по столбцам и запоминаем по необходимым кретериям
 for j in range(width):
     if max_sum is None or coloumn_sum > max_sum:
         max_sum = coloumn_sum
@@ -41,7 +46,7 @@ for j in range(width):
     for i in range(0, (len(matrix))):
         coloumn_sum += int(matrix[i][j])
 
-
+# Проходимся по матрице, меняем местами найденные стобцы и выводим
 print('Измененная матрица:')
 for i in range(len(matrix)):
     for j in range(len(line)):

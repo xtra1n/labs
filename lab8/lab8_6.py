@@ -1,4 +1,7 @@
-# 2. Наименьшее количество отрицательных элементов
+# Леонтьев Андрей
+# ИУ7-14Б
+# Лабораторная работа №8 “Матрицы. Часть 1”
+# 6. Выполнить транспонирование квадратной матрицы.
 
 matrix = [list(map(str, input('Введите 1-ю строку матрицы: ').split()))]
 
@@ -7,6 +10,7 @@ index = 0
 line = matrix[0]
 column = -1
 
+# Ввод матрицы
 for index in range(1, width):
     line = list(map(str, input(
         f'Введите {index+1}-ю строку матрицы: ').split()))
@@ -23,6 +27,7 @@ print('Изначальная матрица:')
 for line in matrix:
     print(*line)
 
+# Проходимся по половине матрицы и соотвественно меняем значение в стобце и строке
 for i in range(width):
     for j in range(i + 1, width):
         matrix[i][j], matrix[j][i] = matrix[j][i], matrix[i][j]
