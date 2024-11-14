@@ -7,7 +7,7 @@
 print('Ввод матрицы должен оканчиваться пустой строкой ')
 
 # Запрашиваем первую строку матрицы
-matrix = [list(map(str, input('Введите 1-ю строку матрицы: ').split()))]
+matrix = [list(map(int, input('Введите 1-ю строку матрицы: ').split()))]
 
 width = len(matrix[0])  # Запоминаем ширину матрицы
 index = 0
@@ -21,7 +21,7 @@ min_cnt = width + 1
 while matrix[index] != []:
     # Cчитаем количество отрицательных в строке
     for i in range(width):
-        if int(line[i]) < 0:
+        if line[i] < 0:
             cnt += 1
     # Запоминаем строку с максимальным и минимальным количеством
     if max_cnt < cnt:
@@ -33,7 +33,7 @@ while matrix[index] != []:
     cnt = 0
     index += 1
     # Запрашиваем следующую строку
-    line = list(map(str, input(
+    line = list(map(int, input(
         f'Введите {index+1}-ю строку матрицы: ').split()))
     if line == []:  # Если введена пустая строка, завершаем цикл
         break
@@ -41,17 +41,23 @@ while matrix[index] != []:
     # Проверяем корректность введенной строки
     while len(matrix[index]) != width and matrix[index] != []:
         print('Количество элементов должно быть таким же как в первой строке')
-        matrix[index] = (list(map(str, input(
+        matrix[index] = (list(map(int, input(
             f'Введите в {index+1}-ю строку матрицы: ').split())))
         line = matrix[index]
 
-print('Изначальная матрица:')
-for line in matrix:
-    print(*line)
+if len(matrix) > 1:
+    print("Исходная матрица")
+    for line in matrix:
+        for i in range(len(line)):
+            print("{:<6d}".format(line[i]), end=' ')
+        print()
 
-# Меняем местами строки
-matrix[max_line], matrix[min_line] = matrix[min_line], matrix[max_line]
-
-print('\n Измененная матрица:')
-for line in matrix:
-    print(*line)
+    # Меняем местами строки
+    matrix[max_line], matrix[min_line] = matrix[min_line], matrix[max_line]
+    print('\nИзмененная матрица:')
+    for line in matrix:
+        for i in range(len(line)):
+            print("{:<6d}".format(line[i]), end=' ')
+        print()
+else:
+    print('Задана пустая матрица')

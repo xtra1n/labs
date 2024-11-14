@@ -8,7 +8,7 @@
 print('Ввод матрицы должен оканчиваться пустой строкой ')
 
 # Запрашиваем первую строку матрицы
-matrix = [list(map(str, input('Введите 1-ю строку матрицы: ').split()))]
+matrix = [list(map(int, input('Введите 1-ю строку матрицы: ').split()))]
 
 width = len(matrix[0])  # Запоминаем ширину матрицы
 index = 0
@@ -19,14 +19,14 @@ max_line = []  # Вводим переменную для максимально
 # Запрашиваем ввод. пока аользователь не введет пустую строку
 while matrix[index] != []:
     for el in line:
-        if int(el) % 2 == 0:  # Проверяем элементы в строке на четность
+        if el % 2 == 0:  # Проверяем элементы в строке на четность
             cnt += 1
     if cnt >= len(max_line) and cnt != 0:
         max_line = line  # Запоминаем максимальную строку
     cnt = 0
     index += 1
     # Запрашиваем следующую строку
-    line = list(map(str, input(
+    line = list(map(int, input(
         f'Введите {index+1}-ю строку матрицы: ').split()))
     if line == []:  # Если введена пустая строка, завершаем цикл
         break
@@ -34,15 +34,16 @@ while matrix[index] != []:
     # Проверяем корректность введенной строки
     while len(matrix[index]) != width and matrix[index] != []:
         print('Количество элементов должно быть таким же как в первой строке')
-        matrix[index] = (list(map(str, input(
+        matrix[index] = (list(map(int, input(
             f'Введите в {index+1}-ю строку матрицы: ').split())))
         line = matrix[index]
 
-print('Изначальная матрица: ')
+print("Исходная матрица")
 for line in matrix:
-    print(*line)
-
-if max_line != []:
-    print('Строка с наименьшим количеством четных', *max_line)
+    for i in range(len(line)):
+        print("{:<6d}".format(line[i]), end=' ')
+    print()
 else:
     print('Не нашлось таких элементов')
+    
+print('Строка с наименьшим количеством четных: ', *max_line)
