@@ -1,4 +1,7 @@
 def get_float_input(text: str):
+    """
+    Ввод вещественных чисел
+    """
     try:
         num = float(input(text))
         return num
@@ -8,6 +11,9 @@ def get_float_input(text: str):
 
 
 def get_user_input():
+    """
+    Ввод необходимых данных для интеграла
+    """
     while True:
         try:
             start_value = get_float_input('Введите начальное значение: ')
@@ -33,6 +39,9 @@ def get_user_input():
 
 
 def output_results(i1, i2, i3, i4, n1, n2):
+    """
+    Вывод таблицы
+    """
     print('-' * 80)
     print('|', ' ' * 33, '|', f'{'N1: ' + f'{n1:.6g}': ^20}'
           f'|{'N2: ' + f'{n2:.6g}': ^20}|')
