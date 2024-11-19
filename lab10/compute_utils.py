@@ -32,13 +32,16 @@ def find_min(err1, err2, err3, err4):
 
 def compute_accurate_value(abs_error_i1, abs_error_i2,
                            abs_error_i3, abs_error_i4):
-    if find_min(abs_error_i1):
+    if find_min(abs_error_i1, abs_error_i2,
+                abs_error_i3, abs_error_i4):
         accurate_value = abs_error_i1
         accurate_method = 1
-    elif find_min(abs_error_i2):
+    elif find_min(abs_error_i2, abs_error_i1,
+                  abs_error_i3, abs_error_i4):
         accurate_value = abs_error_i2
         accurate_method = 1
-    elif find_min(abs_error_i3):
+    elif find_min(abs_error_i3, abs_error_i2,
+                  abs_error_i1, abs_error_i4):
         accurate_value = abs_error_i3
         accurate_method = 2
     else:
@@ -46,3 +49,14 @@ def compute_accurate_value(abs_error_i1, abs_error_i2,
         accurate_method = 2
 
     return accurate_value, accurate_method
+
+
+def compute_n(acurate_method, start_value, finish_value, eps):
+    n = 1
+    method = (right_rectangle_method if acurate_method == 2
+              else trapezoid_method)
+    while abs(method(start_value, finish_value, n) -
+              method(start_value, finish_value, 2*n)) >= eps:
+        n += 1
+
+    return n

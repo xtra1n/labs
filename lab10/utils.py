@@ -1,10 +1,22 @@
+def get_float_input(text: str):
+    try:
+        num = float(input(text))
+        return num
+    except Exception as e:
+        print(f'Ой! {e}')
+        get_float_input(text)
+
+
 def get_user_input():
     while True:
         try:
-            start_value = float(input('Введите начальное значение: '))
-            finish_value = float(input('Введите конечное значение: '))
+            start_value = get_float_input('Введите начальное значение: ')
+            finish_value = get_float_input('Введите конечное значение: ')
 
-            if start_value > finish_value:
+            eps = 1e-6
+
+            if (start_value >= finish_value or
+                    abs(start_value - finish_value) < eps):
                 raise ValueError(
                     'Начальное значение должно быть меньше конечного')
 
@@ -16,7 +28,7 @@ def get_user_input():
                     'Количество участков разбиения должно быть положительным')
 
             return start_value, finish_value, n1, n2
-        except ValueError as e:
+        except Exception as e:
             print(f'Ой! {e}')
 
 
