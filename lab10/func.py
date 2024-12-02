@@ -1,15 +1,14 @@
-from math import sin as m_sin, cos as m_cos
+# from math import sin as m_sin, cos as m_cos
 
 
 def f(x):
     """
     Заданная функция
     """
-    return m_sin(x)
-
+    return 3*x**2
 
 def F(x):
     """
     Первообразная заданной функции
     """
-    return -m_cos(x)
+    return x**3

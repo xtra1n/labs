@@ -72,6 +72,6 @@ def compute_n(acurate_method, start_value, finish_value, eps):
               else trapezoid_method)
     while abs(method(start_value, finish_value, n) -
               method(start_value, finish_value, 2*n)) >= eps:
-        n += 1
+        n += 1000
 
     return n
