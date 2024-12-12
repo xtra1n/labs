@@ -1,23 +1,22 @@
 import re
 
-from text_menu import menu
-
 
 def left_alignment(text: list[str]) -> list[str]:
     for string_id in range(len(text)):
         text[string_id] = ' '.join(text[string_id].split())
-    menu()
+
     return text
 
 
 def right_alignment(text: list[str]) -> list[str]:
+
     text = left_alignment(text)
     max_len = search_max_len(text)
     for string_id in range(len(text)):
         string_len = len(text[string_id])
         if string_len != max_len:
             text[string_id] = ' ' * (max_len - string_len) + text[string_id]
-    menu()
+
     return text
 
 
@@ -48,30 +47,39 @@ def justify_alignment(text: list[str]) -> list[str]:
                     space = ' ' * (new_space_cnt)
                     words[i] = space + words[i]
             text[string_id] = ''.join(words)
-    menu()
 
     return text
 
 
 def remove_word(text: list[str], word: str) -> list[str]:
-    for string_id in range(len(text)):
-        parts = re.split(r'(\s+)', text[string_id])
-        new_parts = [part for part in parts if part != word]
-        text[string_id] = ''.join(new_parts)
-
-    menu()
-
+    """
+     Удаляем слово
+    """
+    for line_num in range(len(text)):
+        words = text[line_num].split()
+        for i in range(len(words)):
+            if '.' in words[i] or ',' in words[i]:
+                if word == words[i][:-1]:
+                    text[line_num] = text[line_num].replace(f' {word}','')
+            else:
+                if word == words[i]:
+                    text[line_num] = text[line_num].replace(f' {word}','').replace(f'{word} ','')
     return text
 
 
 def replace_word(text: list[str], word: str, new_word: str) -> list[str]:
-    for string_id in range(len(text)):
-        parts = re.split(r'(\s+)', text[string_id])
-        new_parts = [new_word if part == word else part for part in parts]
-        text[string_id] = ''.join(new_parts)
-
-    menu()
-
+    """
+    Замена слова
+    """
+    for line_num in range(len(text)):
+        words = text[line_num].split()
+        for i in range(len(words)):
+            if '.' in words[i] or ',' in words[i]:
+                if word == words[i][:-1]:
+                    text[line_num] = text[line_num].replace(f' {word}',f' {new_word}')
+            else:
+                if word == words[i]:
+                    text[line_num] = text[line_num].replace(f' {word}','').replace(f'{word} ',f' {new_word}')
     return text
 
 
@@ -129,20 +137,18 @@ def replace_arifmetic(text: list[str]):
     for d in rows_to_delete[::-1]:  # удаляем строки, которые запомнили
         del text[d]
 
-    menu()
-
     return text
 
 
 def calculate(nums: list[str], operators: list[str]):
+    """
+    Считаем выражение
+    """
     if '*' in operators:
         id_op = 0
         while id_op < len(operators):
             if operators[id_op] == '*':
-                try:
-                    value = nums[id_op] * nums[id_op + 1]
-                except ZeroDivisionError:
-                    value = nums[id_op]
+                value = nums[id_op] * nums[id_op + 1]
                 nums[id_op] = value
                 del nums[id_op + 1]
                 del operators[id_op]
@@ -156,33 +162,51 @@ def calculate(nums: list[str], operators: list[str]):
 
 
 def process_text(text: list[str]) -> tuple[str, list[str]]:
+    """
+    Ищем слово
+    """
     full_text = ' '.join(text)
-    sentences = re.split(r'(?<=[.!?])\s+', full_text)
-    longest_sentence = max(sentences, key=len)    
-    words = re.findall(r'\b\w+\b', longest_sentence)
-    if not words:
-        raise ValueError("Не удалось найти слова в самом длинном предложении.")
+    
+    sentences = []
+    start = 0
+    for i in range(len(full_text)):
+        if full_text[i] in '.!?':
+            if i + 1 < len(full_text) and full_text[i + 1] == ' ':
+                sentences.append(full_text[start:i + 1])
+                start = i + 2
+    if start < len(full_text):
+        sentences.append(full_text[start:])
+    
+    longest_sentence = max(sentences, key=len)
+    
+    words = [word.strip('.,!?;:') for word in longest_sentence.split()]
+    words = [word for word in words if word]  # Убираем пустые строки
+    
     shortest_word = min(words, key=len)
+    
     new_text = []
+    
     for line in text:
-        parts = re.split(r'(\s+)', line)
+        parts = line.split(' ')
         new_line_parts = []
         removed = False
         for part in parts:
-            if part == shortest_word and not removed:
+            clean_part = part.strip('.,!?;:')
+            if clean_part == shortest_word and not removed:
                 removed = True
             else:
                 new_line_parts.append(part)
-        new_text.append(''.join(new_line_parts))
-
+                new_text.append(' '.join(new_line_parts))
+    
     print('Короткое слово: ', shortest_word)
-
-    menu()
-
+    
     return new_text
 
 
 def search_max_len(text):
+    """
+    Ищем длинную строку
+    """
     max_len = max(text, key=len)
 
     return len(max_len)
