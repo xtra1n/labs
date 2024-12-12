@@ -162,30 +162,26 @@ def calculate(nums: list[str], operators: list[str]):
 
 
 def process_text(text: list[str]) -> tuple[str, list[str]]:
-    """
-    Ищем слово
-    """
-    full_text = ' '.join(text)
-    
-    sentences = []
-    start = 0
-    for i in range(len(full_text)):
-        if full_text[i] in '.!?':
-            if i + 1 < len(full_text) and full_text[i + 1] == ' ':
-                sentences.append(full_text[start:i + 1])
-                start = i + 2
-    if start < len(full_text):
-        sentences.append(full_text[start:])
-    
-    longest_sentence = max(sentences, key=len)
-    
+    longest_sentence = ''
+    current_sentence = ''
+
+    for line in text:
+        for char in line:
+            current_sentence += char
+            if char in '.!?':
+                if len(current_sentence) > len(longest_sentence):
+                    longest_sentence = current_sentence.strip()
+                current_sentence = ''
+        if current_sentence:
+            current_sentence += ' '
+
     words = [word.strip('.,!?;:') for word in longest_sentence.split()]
-    words = [word for word in words if word]  # Убираем пустые строки
-    
+    words = [word for word in words if word]
+
     shortest_word = min(words, key=len)
-    
+
     new_text = []
-    
+
     for line in text:
         parts = line.split(' ')
         new_line_parts = []
@@ -196,10 +192,10 @@ def process_text(text: list[str]) -> tuple[str, list[str]]:
                 removed = True
             else:
                 new_line_parts.append(part)
-                new_text.append(' '.join(new_line_parts))
-    
+        new_text.append(' '.join(new_line_parts))
+
     print('Короткое слово: ', shortest_word)
-    
+
     return new_text
 
 
