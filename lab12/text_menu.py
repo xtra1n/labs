@@ -1,5 +1,5 @@
 from text_editor import left_alignment, right_alignment, justify_alignment, \
-    remove_word, replace_word, replace_arifmetic, process_text
+    remove_word, replace_word, arithmetic_expressions, process_text
 from text import get_text
 from utils import output
 
@@ -36,7 +36,7 @@ def menu():
                 output(text)
                 output_menu()
             if point == 6:
-                text = replace_arifmetic(text)
+                text = arithmetic_expressions(text)
                 output(text)
                 output_menu()
             if point == 7:

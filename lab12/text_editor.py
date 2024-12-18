@@ -83,82 +83,84 @@ def replace_word(text: list[str], word: str, new_word: str) -> list[str]:
     return text
 
 
-def replace_arifmetic(text: list[str]):
-    numbers = '0123456789'
-    nums = []  # сюда сохраняем числа
-    operators = []  # сюда сохраняем знаки сложения и умножения
-    arifmetic_start = (-1, -1)
-    new_num = ''
-    arifmetic_end = (-1, -1)
-    rows_to_delete = []  #  здесь храним индексы строк, которые нужно удалить
-    wrong_operators = False  # флаг на случай, если перед оператором не было числа
-    for i in range(len(text)):
-        k = 0
-        while k < len(text[i]):  # реализуем for через while (необходимо из-за удалений)
-            letter = text[i][k]
-            if letter != ' ':
-                if letter in numbers:
-                    if not new_num and not nums:  # если арифметическое выражение только началось
-                        arifmetic_start = (i, k)
-                    new_num += letter
-                    arifmetic_end = (i, k)
-                elif letter in '+*':
-                    if new_num:  # если перед оператором было число
-                        nums.append(int(new_num))  # сохраняем число
-                        new_num = ''
-                        operators.append(letter)  # сохраняем оператор
+def arithmetic_expressions(x):
+    for i in range(len(x)):
+        line = list(x[i])
+        j = 0
+        while j < len(line):
+            if line[j] == "+":
+                number1 = ""
+                cnt1 = 0
+                flag = True
+                for k in range(j - 1, -1, -1):
+                    if line[k] == " " and flag:
+                        cnt1 += 1
+                    elif line[k].isdigit():
+                        flag = False
+                        number1 = line[k] + number1
+                        cnt1 += 1
                     else:
-                        wrong_operators = True  # <- перед оператором не было числа
-
-                # если буква не является составляющей арифметического выражения или это последняя буква текста (вдруг выражение заканчивается в конце текста) или перед оператором не было числа
-                if letter not in '+* ' + numbers or (i + 1 == len(text) and k + 1 == len(text[i])) or wrong_operators:
-                    if new_num:
-                        nums.append(int(new_num))
-                    if nums and len(operators) == len(nums):  # если в конце арифметического выражения оказался оператор
-                        operators = operators[:-1]
-                    if len(nums) - 1 == len(operators) and operators:  # проверка верное ли количество операторов и есть ли они вообще
-                        res = calculate(nums, operators)  # считаем значение выражения
-                        row_ind = arifmetic_start[0]
-                        if arifmetic_end[0] != arifmetic_start[0]:  # если в арифметическом выражении был переход строк (возможно больше одной)
-                            text[row_ind] = text[row_ind][:arifmetic_start[1]] + f'{res:.3g}' + text[row_ind][len(text[arifmetic_start[0]]) + 1:]  # вставляем результат в начало арифм. выражения
-                            text[i] = text[arifmetic_end[0]][arifmetic_end[1] + 1:]  # убираем конец выражения (который был на другой строке)
-                            for d in range(arifmetic_start[0] + 1, arifmetic_end[0]):  # запоминаем все строки между первой строкой, где началось выражение и последней (если такие есть)
-                                rows_to_delete.append(d)
-                            k = 0  # возвращаемся в начало предложения, где закончилось выражение (до того как мы его удалили, оно было вначале)
-                        else:  # если в арифметическом выражении не было перехода по строкам
-                            text[row_ind] = text[row_ind][:arifmetic_start[1]] + f'{res:.3g}' + text[row_ind][arifmetic_end[1] + 1:]
-                            k -= abs(len(str(res)) - (arifmetic_end[1] - arifmetic_start[1]))  # возвращаемся в конец результата, на который мы заменили выражение
-                    nums = []
-                    operators = []
-                    new_num = ''
-                    arifmetic_start = arifmetic_end = -1
-                    wrong_operators = 0
-            k += 1
-    for d in rows_to_delete[::-1]:  # удаляем строки, которые запомнили
-        del text[d]
-
-    return text
-
-
-def calculate(nums: list[str], operators: list[str]):
-    """
-    Считаем выражение
-    """
-    if '*' in operators:
-        id_op = 0
-        while id_op < len(operators):
-            if operators[id_op] == '*':
-                value = nums[id_op] * nums[id_op + 1]
-                nums[id_op] = value
-                del nums[id_op + 1]
-                del operators[id_op]
+                        break
+                number2 = ""
+                cnt2 = 0
+                flag = True
+                for k in range(j + 1, len(line)):
+                    if line[k] == " " and flag:
+                        cnt2 += 1
+                    elif line[k].isdigit():
+                        flag = False
+                        number2 += line[k]
+                        cnt2 += 1
+                    else:
+                        break
+                if number1 != "" and number2 != "":
+                    number1 = int(number1)
+                    number2 = int(number2)
+                    summa = number1 + number2
+                    line[j] = summa
+                    del line[j - cnt1:j + cnt2 + 1]
+                    line.insert(j - cnt1, str(summa))
+                    x[i] = "".join(line)
+                else:
+                    j += 1
+            elif line[j] == "*":
+                number1 = ""
+                cnt1 = 0
+                flag = True
+                for k in range(j - 1, -1, -1):
+                    if line[k] == " " and flag:
+                        cnt1 += 1
+                    elif line[k].isdigit():
+                        flag = False
+                        number1 = line[k] + number1
+                        cnt1 += 1
+                    else:
+                        break
+                number2 = ""
+                cnt2 = 0
+                flag = True
+                for k in range(j + 1, len(line)):
+                    if line[k] == " " and flag:
+                        cnt2 += 1
+                    elif line[k].isdigit():
+                        flag = False
+                        number2 += line[k]
+                        cnt2 += 1
+                    else:
+                        break
+                if number1 != "" and number2 != "" and number2 != "0":
+                    number1 = int(number1)
+                    number2 = int(number2)
+                    summa = number1 * number2
+                    line[j] = summa
+                    del line[j - cnt1:j + cnt2 + 1]
+                    line.insert(j - cnt1, str(summa))
+                    x[i] = "".join(line)
+                else:
+                    j += 1
             else:
-                id_op += 1
-    res = nums[0]
-    if len(nums) > 1:
-        for num in nums[1:]:
-            res += num
-    return res
+                j += 1
+    return x
 
 
 def process_text(text: list[str]) -> tuple[str, list[str]]:
