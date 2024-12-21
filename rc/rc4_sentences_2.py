@@ -1,15 +1,22 @@
-def process_file(input_file, output_file):
-    # Обработка файла без использования дополнительных массивов
-    with open(input_file, 'r', encoding='utf-8') as infile, open(output_file, 'w', encoding='utf-8') as outfile:
-        buffer = ""
-        position = infile.seek(0, 2)  # Перемещаем указатель в конец файла
-        while position > 0:
-            position -= 1
-            infile.seek(position)
-            char = infile.read(1)
+def main():
+    with open('/home/andrey/pyprojects/labs/in2.txt', 'r') as infile, open('out.txt', 'w') as outfile:
+        buffer = ''
+        
+        # Обработка файла построчно
+        for line in infile:
+            buffer += line.strip()  # Сохраняем текущую строку в буфере
+            sentences = buffer.split('.')
+            
+            # Записываем предложения в обратном порядке
+            for sentence in reversed(sentences[:-1]):
+                if sentence.strip():
+                    outfile.write(sentence.strip() + '.\n')
+            
+            buffer = sentences[-1]  # Оставляем остаток для следующей строки
 
-            if char == '.' and buffer:
-                outfile.write(buffer[::-1] + '\n')
-                buffer = ""
-            else:
-                buffer += char.strip()
+        # Если в конце есть неполное предложение в buffer, записываем его
+        if buffer.strip():
+            outfile.write(buffer.strip() + '.\n')
+
+if __name__ == '__main__':
+    main()

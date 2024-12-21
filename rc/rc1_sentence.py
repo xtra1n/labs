@@ -1,5 +1,5 @@
 def main():
-    with open('in.txt', 'r') as infile, open('out.txt', 'w') as outfile:
+    with open('/home/andrey/pyprojects/labs/in2.txt', 'r') as infile, open('out.txt', 'w') as outfile:
         buffer = ''
         for line in infile:
             buffer += line.strip()
