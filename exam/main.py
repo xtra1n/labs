@@ -1,8 +1,8 @@
 import re
 
 
-def split_sentences():
-    with open('/home/andrey/pyprojects/labs/exam/in.txt', 'r') as in_file, open('out.txt', 'w') as out_file:
+def split_sentences(in_file, out_file):
+    with open(in_file, 'r') as in_file, open(out_file, 'w') as out_file:
         buffer = ''
         for line in in_file:
             buffer += line.strip()
@@ -28,6 +28,7 @@ def hex_to_oct(num, is_digit):
     num = ''.join(oct(int(num[i:i+3], 2))[2:] for i in range(0, len(num), 3) )
     return num
 
+
 def convert_hex(match):
     num = match.group(0)
     main_part = num.split(',')[0]
@@ -38,10 +39,10 @@ def convert_hex(match):
     return main_part + ',' + digit
 
 
-
-
 def main():
-    split_sentences()
+    in_file = 'in.txt'
+    out_file = 'out.txt'
+    split_sentences(in_file, out_file)
 
 
 if __name__ == '__main__':
