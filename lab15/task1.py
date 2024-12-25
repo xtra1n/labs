@@ -2,9 +2,10 @@ import struct
 import os
 
 def remove_odd_numbers(file_name):
+    record_size = struct.calcsize('i')
     with open(file_name, 'r+b') as f:
         pos = 0  # текущая позиция в файле
-        byte = f.read(4)  # считываем первое число
+        byte = f.read(record_size)  # считываем первое число
         
         while byte:
             num = struct.unpack('i', byte)[0]  # распаковываем число
@@ -17,7 +18,7 @@ def remove_odd_numbers(file_name):
             # Если число нечетное, просто пропускаем его и не меняем позицию
 
             # Читаем следующее число
-            byte = f.read(4)
+            byte = f.read(record_size)
         
         # После окончания обработки, заполняем оставшееся место нулями
         # для того чтобы удалить "старые" данные в конце файла

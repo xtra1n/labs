@@ -7,7 +7,7 @@ RECORD_FORMAT = 'i20s20si'
 RECORD_SIZE = calcsize(RECORD_FORMAT)
 
 
-def pack_data(user_id: int, username: str, email:str, status: int):
+def pack_data(user_id: int, username: str, email: str, status: int):
     '''
     Упаковка данных
     '''

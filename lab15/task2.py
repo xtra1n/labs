@@ -2,13 +2,14 @@ import struct
 import os
 
 def add_doubled_values(file_name):
+    record_size = struct.calcsize('i')
     # Открываем файл для чтения и записи
     with open(file_name, 'r+b') as f:
         # Чтение текущей позиции
         pos = 0
         
         while True:
-            byte = f.read(4)  # Читаем 4 байта (одно 32-битное число)
+            byte = f.read(record_size)  # Читаем 4 байта (одно 32-битное число)
             if not byte:
                 break  # Достигнут конец файла
             

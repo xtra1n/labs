@@ -15,21 +15,21 @@ def main():
     file = 'file.bin'
     create_file()
     remove_odd_numbers(file)
-    print('task1: ', end='')
+    print('task1(Удалить нечетные): ', end='')
     read_file()
-    print()
+    print('\n')
 
     create_file()
     add_doubled_values(file)
-    print('task2: ', end='')
+    print('task2(Удвоенное четное): ', end='')
     read_file()
-    print()
+    print('\n')
 
     create_file()
     binary_insertion_sort(file)
-    print('task3: ', end='')
+    print('task3(Бинарная вставка): ', end='')
     read_file()
-    print()
+    print('\n')
 
     
 
